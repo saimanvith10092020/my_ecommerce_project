@@ -1,0 +1,66 @@
+<div class="container">
+  <h3>Your Order List:</h3>
+  <table class="table table-striped table-bordered">
+    <thead class="table-secondary">
+      <tr>
+        <th>Order Tracking Number</th>
+        <th>Order Items</th>
+        <th>Billing Address</th>
+        <th>Shipping Address</th>
+        <th>Date</th>
+        <th>Total Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customerOrder of customerOrders">
+        <td>
+          {{ customerOrder.orderTrackingNumber }}
+        </td>
+        <td>
+          <tr *ngFor="let orderItem of customerOrder.orderItems">
+            <td>
+              <a routerLink="/products/{{ orderItem.productId }}">
+                <img
+                  src="{{ orderItem.imageUrl }}"
+                  alt=""
+                  style="width: 50px"
+                />
+              </a>
+            </td>
+          </tr>
+        </td>
+        <td>
+          {{ customerOrder.billingAddress.street }}
+          <br />
+          {{ customerOrder.billingAddress.city }}
+          <br />
+          {{ customerOrder.billingAddress.state }}
+          <br />
+          {{ customerOrder.billingAddress.country }}
+          <br />{{ customerOrder.billingAddress.zipCode }}
+        </td>
+        <td>
+          {{ customerOrder.shippingAddress.street }}
+          <br />
+          {{ customerOrder.shippingAddress.city }}
+          <br />
+          {{ customerOrder.shippingAddress.state }}
+          <br />
+          {{ customerOrder.shippingAddress.country }}
+          <br />
+          {{ customerOrder.shippingAddress.zipCode }}
+        </td>
+        <td>
+          {{ customerOrder.dateCreated | date }}
+        </td>
+        <td>
+          {{ customerOrder.totalQuantity }}
+        </td>
+        <td>
+          {{ customerOrder.totalPrice | currency : "INR" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
